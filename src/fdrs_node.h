@@ -4,6 +4,9 @@
 //
 //  Developed by Timm Bogner (timmbogner@gmail.com) in Urbana, Illinois, USA.
 //
+#ifndef __FDRS_NODE_h__
+#define __FDRS_NODE_h__
+
 #include <fdrs_datatypes.h>
 #include <fdrs_globals.h>
 #define FDRS_NODE
@@ -400,3 +403,4 @@ uint32_t pingFDRS(uint32_t timeout)
 #endif
 }
 
+#endif //__FDRS_NODE_h__

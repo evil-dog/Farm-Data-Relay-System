@@ -1,3 +1,6 @@
+#ifndef __FDRS_GATEWAY_LORA_h__
+#define __FDRS_GATEWAY_LORA_h__
+
 #include <RadioLib.h>
 
 #define GLOBAL_ACK_TIMEOUT 400 // LoRa ACK timeout in ms. (Minimum = 200)
@@ -627,3 +630,5 @@ crcResult handleLoRa()
   }
   return crcReturned;
 }
+
+#endif //__FDRS_GATEWAY_LORA_h__

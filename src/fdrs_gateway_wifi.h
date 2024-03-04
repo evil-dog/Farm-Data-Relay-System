@@ -1,3 +1,6 @@
+#ifndef __FDRS_GATEWAY_WIFI_h__
+#define __FDRS_GATEWAY_WIFI_h__
+
 #include <WiFiUdp.h>
 #ifdef ESP8266
 #include <ESP8266WiFi.h>
@@ -159,3 +162,5 @@ void begin_wifi()
   }
 #endif // USE_ETHERNET
 }
+
+#endif //__FDRS_GATEWAY_WIFI_h__

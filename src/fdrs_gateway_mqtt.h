@@ -1,3 +1,6 @@
+#ifndef __FDRS_GATEWAY_MQTT_h__
+#define __FDRS_GATEWAY_MQTT_h__
+
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 
@@ -174,3 +177,5 @@ void sendMQTT()
     serializeJson(doc, outgoingString);
     mqtt_publish((char *)outgoingString.c_str());
 }
+
+#endif //__FDRS_GATEWAY_MQTT_h__

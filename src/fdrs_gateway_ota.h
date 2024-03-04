@@ -1,3 +1,6 @@
+#ifndef __FDRS_GATEWAY_OTA_h__
+#define __FDRS_GATEWAY_OTA_h__
+
 #if defined(ESP32) || defined(ESP8266)
 #include <ArduinoOTA.h>
 #endif // defined(ESP32) || defined (ESP8266)
@@ -57,3 +60,4 @@ void handleOTA() {
   #endif // defined(ESP32) || defined (ESP8266)
 }
 
+#endif //__FDRS_GATEWAY_OTA_h__

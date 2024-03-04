@@ -3,6 +3,9 @@
 //  GATEWAY Main Functions
 //  Developed by Timm Bogner (timmbogner@gmail.com)
 
+#ifndef __FDRS_GATEWAY_h__
+#define __FDRS_GATEWAY_h__
+
 #include "fdrs_datatypes.h"
 #include "fdrs_globals.h"
 #define FDRS_GATEWAY
@@ -244,3 +247,5 @@ void loopFDRS()
 #ifndef USE_WIFI
   void sendMQTT() {}
 #endif
+
+#endif //__FDRS_GATEWAY_h__

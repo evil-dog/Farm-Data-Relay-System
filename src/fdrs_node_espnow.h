@@ -1,3 +1,6 @@
+#ifndef __FDRS_NODE_ESPNOW_h__
+#define __FDRS_NODE_ESPNOW_h__
+
 #if defined(ESP8266)
     #include <ESP8266WiFi.h>
     #include <espnow.h>
@@ -114,3 +117,4 @@ bool refresh_registration()
   return true;
 }
 
+#endif //__FDRS_NODE_ESPNOW_h__

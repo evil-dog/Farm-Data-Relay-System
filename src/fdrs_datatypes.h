@@ -1,7 +1,12 @@
 // A list of all datatypes you can use within FDRS.
 // If you are missing any data type, please open an issue at:
 // https://github.com/timmbogner/Farm-Data-Relay-System/issues
- 
+
+#ifndef __FDRS_DATATYPES_h__
+#define __FDRS_DATATYPES_h__
+
+#include <Arduino.h>
+
 typedef struct FDRSPeer {
   uint8_t mac[6];
   uint32_t last_seen = 0;
@@ -24,7 +29,7 @@ enum crcResult {
   CRC_NULL,
   CRC_OK,
   CRC_BAD,
-} returnCRC;
+};
 
 enum {
   cmd_clear,
@@ -46,8 +51,6 @@ enum
   event_lora2,
   event_internal
 };
-#ifndef FDRS_DATA_TYPES
-#define FDRS_DATA_TYPES
 
 #define STATUS_T        0  // Status 
 #define TEMP_T          1  // Temperature 
@@ -84,4 +87,4 @@ enum
 #define ENERGY_T        32 // Energy
 #define ENERGY2_T       33 // Energy #2
 
-#endif //FDRS_DATA_TYPES
+#endif //__FDRS_DATATYPES_h__

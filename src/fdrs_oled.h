@@ -1,4 +1,6 @@
 
+#ifndef __FDRS_OLED_h__
+#define __FDRS_OLED_h__
 
 #include <ESP8266_and_ESP32_OLED_driver_for_SSD1306_displays/src/SSD1306Wire.h>
 #define DISPLAY_PAGES 4
@@ -142,3 +144,5 @@ void init_oled(){
   display.flipScreenVertically();
   draw_OLED_header();
   }
+
+  #endif //__FDRS_OLED_h__

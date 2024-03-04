@@ -33,4 +33,4 @@
 
 #define MAC_PREFIX  0xAA, 0xBB, 0xCC, 0xDD, 0xEE  // MAC address prefix. Can be used to distinguish different ESP-NOW networks.
 
-#endif
+#endif //__FDRS_GLOBALS_h__

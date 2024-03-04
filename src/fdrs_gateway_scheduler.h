@@ -1,4 +1,5 @@
-
+#ifndef __FDRS_GATEWAY_SCHEDULER_h__
+#define __FDRS_GATEWAY_SCHEDULER_h__
 
 typedef struct ScheduleItem
 {
@@ -35,3 +36,5 @@ void handle_schedule()
         }
     }
 }
+
+#endif //__FDRS_GATEWAY_SCHEDULER_h__

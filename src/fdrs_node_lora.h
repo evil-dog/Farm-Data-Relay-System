@@ -1,3 +1,5 @@
+#ifndef __FDRS_NODE_LORA_h__
+#define __FDRS_NODE_LORA_h__
 
 #include <RadioLib.h>
 
@@ -523,3 +525,5 @@ void printLoraPacket(uint8_t *p, int size)
     }
     printf("\n");
 }
+
+#endif //__FDRS_NODE_LORA_h__

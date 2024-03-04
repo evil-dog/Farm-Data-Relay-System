@@ -1,3 +1,6 @@
+#ifndef __FDRS_GATEWAY_ESPNOW_h__
+#define __FDRS_GATEWAY_ESPNOW_h__
+
 #ifdef ESP8266
 #include <ESP8266WiFi.h>
 #include <espnow.h>
@@ -367,3 +370,5 @@ void sendESPNow(uint8_t address)
   esp_now_send(temp_peer, (uint8_t *)&thePacket, j * sizeof(DataReading));
   esp_now_del_peer(temp_peer);
 }
+
+#endif //__FDRS_GATEWAY_ESPNOW_h__

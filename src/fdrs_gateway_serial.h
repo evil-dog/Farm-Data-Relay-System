@@ -1,3 +1,6 @@
+#ifndef __FDRS_GATEWAY_SERIAL_h__
+#define __FDRS_GATEWAY_SERIAL_h__
+
 #include <ArduinoJson.h>
 
 #if defined (ESP32)
@@ -76,3 +79,5 @@ void handleSerial(){
     getSerial();
   }
 }
+
+#endif //__FDRS_GATEWAY_SERIAL_h__
