@@ -58,12 +58,15 @@ void (*callback_ptr)(DataReading);
 uint16_t subscription_list[256] = {};
 bool active_subs[256] = {};
 
+#ifdef USE_OLED
+  #include "fdrs_oled.h"
+#endif
+
+FDRS_OLED oled(OLED_SDA, OLED_SCL, OLED_RST, OLED_PAGE_SECS, false, READING_ID, OLED_HEADER, GTWY_MAC);
+
 #include "fdrs_debug.h"
 #ifdef DEBUG_CONFIG
 // #include "fdrs_checkConfig.h"
-#endif
-#ifdef USE_OLED
-  #include "fdrs_oled.h"
 #endif
 #ifdef USE_ESPNOW
   #include "fdrs_node_espnow.h"
@@ -81,7 +84,7 @@ void beginFDRS()
   // resetReason = esp_reset_reason();
 #endif
 #ifdef USE_OLED
-  init_oled();
+  oled.init_oled();
   DBG("Display initialized!");
   DBG("Hello, World!");
 #endif

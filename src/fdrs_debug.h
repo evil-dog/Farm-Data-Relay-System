@@ -2,9 +2,13 @@
     #define DBG_LEVEL GLOBAL_DBG_LEVEL
 #endif
 
+#ifdef USE_OLED
+#include "fdrs_oled.h"
+#endif // USE_OLED
+
 #ifdef FDRS_DEBUG
     #ifdef USE_OLED
-        #define DBG(a) Serial.print("    "); Serial.println(a); debug_OLED(String(a));
+        #define DBG(a) Serial.print("    "); Serial.println(a); oled.debug_OLED(String(a));
     #else
         #define DBG(a) Serial.print("    "); Serial.println(a);
     #endif // USE_OLED
@@ -22,7 +26,7 @@
     #endif
 #else
     #ifdef USE_OLED
-        #define DBG(a) debug_OLED(String(a));
+        #define DBG(a) oled.debug_OLED(String(a));
     #else
         #define DBG(a)
     #endif // USE_OLED
