@@ -60,9 +60,9 @@ bool active_subs[256] = {};
 
 #ifdef USE_OLED
   #include "fdrs_oled.h"
-#endif
 
-FDRS_OLED oled(OLED_SDA, OLED_SCL, OLED_RST, OLED_PAGE_SECS, false, READING_ID, OLED_HEADER, GTWY_MAC);
+  FDRS_OLED oled(OLED_SDA, OLED_SCL, OLED_RST, OLED_PAGE_SECS, false, READING_ID, OLED_HEADER, GTWY_MAC);
+#endif
 
 #include "fdrs_debug.h"
 #ifdef DEBUG_CONFIG

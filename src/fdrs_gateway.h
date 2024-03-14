@@ -68,7 +68,10 @@ void releaseLogBuffer();
 
 #ifdef USE_OLED
   #include "fdrs_oled.h"
+
+  FDRS_OLED oled(OLED_SDA, OLED_SCL, OLED_RST, OLED_PAGE_SECS, false, UNIT_MAC, OLED_HEADER, 0);
 #endif
+
 #include "fdrs_debug.h"
 #include "fdrs_gateway_serial.h"
 #include "fdrs_gateway_scheduler.h"
@@ -123,7 +126,7 @@ void beginFDRS()
 #endif
 
 #ifdef USE_OLED
-  init_oled();
+  oled.init_oled();
   DBG("Display initialized!");
   DBG("Hello, World!");
 #endif
@@ -195,7 +198,7 @@ void loopFDRS()
   handleOTA();
 #endif
 #ifdef USE_OLED
-  drawPageOLED(true);
+  oled.drawPageOLED(true);
 #endif
   if (newData != event_clear)
   {
