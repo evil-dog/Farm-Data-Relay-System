@@ -29,21 +29,21 @@ uint8_t ESPNOW2[] = {MAC_PREFIX, ESPNOW_NEIGHBOR_2};
 
 
 // Set ESP-NOW send and receive callbacks for either ESP8266 or ESP32
-#if defined(ESP8266)
+#ifdef ESP8266
 void OnDataSent(uint8_t *mac_addr, uint8_t sendStatus)
+#else
+void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status)
+#endif
 {
   esp_now_sent_flag = true;
 }
+
+#ifdef ESP8266
 void OnDataRecv(uint8_t *mac, uint8_t *incomingData, uint8_t len)
-{
-#elif defined(ESP32)
-void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status)
-{
-    esp_now_sent_flag = true;
-}
+#else
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len)
-{
 #endif
+{
   memcpy(&incMAC, mac, sizeof(incMAC));
   if (len < sizeof(DataReading))
   {
@@ -301,8 +301,6 @@ void sendESPNowNbr(uint8_t interface)
   }
 }
 
-
-
 void sendESPNowPeers()
 {
   DBG("Sending to ESP-NOW peers.");
@@ -332,10 +330,6 @@ void sendESPNowPeers()
 
 
 }
-
-
-
-
 
 void sendESPNow(uint8_t address)
 {

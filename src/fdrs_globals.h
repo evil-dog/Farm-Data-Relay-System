@@ -1,10 +1,11 @@
+#ifndef __FDRS_GLOBALS_h__
+#define __FDRS_GLOBALS_h__
+
 // FARM DATA RELAY SYSTEM
 
 // Global Configuration
 
 // Developed by Timm Bogner (timmbogner@gmail.com) in Urbana, Illinois, USA.
-#ifndef __FDRS_GLOBALS_h__
-#define __FDRS_GLOBALS_h__
 
 #define GLOBAL_DBG_LEVEL 0
 
@@ -32,5 +33,9 @@
 #define GLOBAL_LORA_INTERVAL 5000  // Interval between LoRa buffer releases. Must be longer than transmission time-on-air.
 
 #define MAC_PREFIX  0xAA, 0xBB, 0xCC, 0xDD, 0xEE  // MAC address prefix. Can be used to distinguish different ESP-NOW networks.
+
+#define GLOBAL_ACK_TIMEOUT 400 // LoRa ACK timeout in ms. (Minimum = 200)
+#define GLOBAL_LORA_RETRIES 2  // LoRa ACK automatic retries [0 - 3]
+#define GLOBAL_LORA_TXPWR 17   // LoRa TX power in dBm (: +2dBm - +17dBm (for SX1276-7) +20dBm (for SX1278))
 
 #endif //__FDRS_GLOBALS_h__

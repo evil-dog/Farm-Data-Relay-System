@@ -2,6 +2,7 @@
 #define __FDRS_GATEWAY_LORA_h__
 
 #include <RadioLib.h>
+#include "fdrs_utils.h"
 
 #define GLOBAL_ACK_TIMEOUT 400 // LoRa ACK timeout in ms. (Minimum = 200)
 #define GLOBAL_LORA_RETRIES 2  // LoRa ACK automatic retries [0 - 3]
@@ -132,7 +133,6 @@ uint32_t tx_start_time;
 // Function prototypes
 crcResult transmitLoRa(uint16_t *, DataReading *, uint8_t);
 crcResult transmitLoRa(uint16_t *, SystemPacket *, uint8_t);
-static uint16_t crc16_update(uint16_t, uint8_t);
 
 #if defined(ESP8266) || defined(ESP32)
 ICACHE_RAM_ATTR
@@ -146,36 +146,6 @@ void setFlag(void)
   }
   // we sent or received  packet, set the flag
   operationDone = true;
-}
-
-// crc16_update used by both LoRa and filesystem
-
-// CRC16 from https://github.com/4-20ma/ModbusMaster/blob/3a05ff87677a9bdd8e027d6906dc05ca15ca8ade/src/util/crc16.h#L71
-
-/** @ingroup util_crc16
-    Processor-independent CRC-16 calculation.
-    Polynomial: x^16 + x^15 + x^2 + 1 (0xA001)<br>
-    Initial value: 0xFFFF
-    This CRC is normally used in disk-drive controllers.
-    @param uint16_t crc (0x0000..0xFFFF)
-    @param uint8_t a (0x00..0xFF)
-    @return calculated CRC (0x0000..0xFFFF)
-*/
-
-static uint16_t crc16_update(uint16_t crc, uint8_t a)
-{
-  int i;
-
-  crc ^= a;
-  for (i = 0; i < 8; ++i)
-  {
-    if (crc & 1)
-      crc = (crc >> 1) ^ 0xA001;
-    else
-      crc = (crc >> 1);
-  }
-
-  return crc;
 }
 
 crcResult transmitLoRa(uint16_t *destMac, DataReading *packet, uint8_t len)

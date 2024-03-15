@@ -10,14 +10,12 @@
 typedef struct FDRSPeer {
   uint8_t mac[6];
   uint32_t last_seen = 0;
-
 } FDRSPeer;
 
 typedef struct __attribute__((packed)) DataReading {
   float d;
   uint16_t id;
   uint8_t t;
-
 } DataReading;
 
 typedef struct __attribute__((packed)) SystemPacket {
@@ -38,8 +36,7 @@ enum {
   cmd_ack,
 };
 
-enum
-{
+enum {
   event_clear,
   event_espnowg,
   event_espnow1,

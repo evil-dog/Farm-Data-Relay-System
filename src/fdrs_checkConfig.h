@@ -1,3 +1,6 @@
+#ifndef __FDRS_CHECKCONFIG_h__
+#define __FDRS_CHECKCONFIG_h__
+
 //  FARM DATA RELAY SYSTEM
 //
 //  DETAILED NODES' CONFIGURATION CHECK
@@ -9,12 +12,8 @@
 //
 //  Contributed by Sascha Juch (sascha.juch@gmail.com)
 //
-#ifndef __FDRS_CHECKCONFIG_h__
-#define __FDRS_CHECKCONFIG_h__
-
 const char* separatorLine   = "--------------------------------------------------------------";
 const char* headerAndFooter = "==============================================================";
-
 
 // helper function for obfuscating passwords
 String obfuscatePassword(String password) {
@@ -24,13 +23,11 @@ String obfuscatePassword(String password) {
 	return String(obfuscatedPass);
 }
 
-
 // helper function for small header above each sub section
 void printSmallSectionHeader(const char* headerText) {
 	DBG(separatorLine);
 	DBG(headerText);
 }
-
 
 // helper function for a nice little header above each section
 void printSectionHeader(const char* headerText) {
@@ -39,14 +36,12 @@ void printSectionHeader(const char* headerText) {
 	DBG(separatorLine);
 }
 
-
 // helper function for a nice little header above each main section
 void printConfigHeader(const char* headerText) {
 	DBG(headerAndFooter);
 	DBG(headerText);
 	DBG(headerAndFooter);
 }
-
 
 // check which logging method(s) have been activated for a node
 void printLoggingInformation() {
@@ -90,7 +85,6 @@ void printLoggingInformation() {
 #endif //USE_FS_LOG
 }
 
-
 // check which protocols are activated and which are deactivated
 void printActivatedProtocols() {
 	// current candidates are: ESPNOW, LORA and MQTT (WIFI)
@@ -125,7 +119,6 @@ void printActivatedProtocols() {
 #endif
 }
 
-
 void printEspnowDetails() {
 #ifdef USE_ESPNOW
 
@@ -137,7 +130,6 @@ void printEspnowDetails() {
 
 #endif //USE_ESPNOW
 }
-
 
 void printWifiDetails() {
 #ifdef USE_WIFI
@@ -275,7 +267,6 @@ void printWifiDetails() {
 #endif //USE_WIFI
 }
 
-
 void printLoraDetails() {
 #ifdef USE_LORA
 	printSmallSectionHeader("LoRa Details:");
@@ -352,7 +343,6 @@ void printLoraDetails() {
 #endif //USE_LORA
 }
 
-
 void checkConfig() {
 	printConfigHeader("NODE CONFIGURATION OVERVIEW");
 #ifdef UNIT_MAC
@@ -394,4 +384,3 @@ void checkConfig() {
 }
 
 #endif //__FDRS_CHECKCONFIG_h__
-

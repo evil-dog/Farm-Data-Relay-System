@@ -17,36 +17,34 @@ bool pingFlag = false;
 uint32_t last_refresh = 0;
 uint32_t gtwy_timeout = 300000;
 
-// Set ESP-NOW send and receive callbacks for either ESP8266 or ESP32
-#if defined(ESP8266)
-void OnDataSent(uint8_t *mac_addr, uint8_t sendStatus)
-{
-    if (sendStatus == 0)
-    {
-        esp_now_ack_flag = CRC_OK;
-    }
-    else
-    {
-        esp_now_ack_flag = CRC_BAD;
-    }
-}
-void OnDataRecv(uint8_t *mac, uint8_t *incomingData, uint8_t len)
-{
-#elif defined(ESP32)
-void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status)
-{
-    if (status == ESP_NOW_SEND_SUCCESS)
-    {
-        esp_now_ack_flag = CRC_OK;
-    }
-    else
-    {
-        esp_now_ack_flag = CRC_BAD;
-    }
-}
-void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len)
-{
+// ESP8266 doesn't define this, so we define it for ourselves
+#ifndef ESP_NOW_SEND_SUCCESS
+#  define ESP_NOW_SEND_SUCCESS 0
 #endif
+
+// Set ESP-NOW send and receive callbacks for either ESP8266 or ESP32
+#ifdef ESP8266
+void OnDataSent(uint8_t *mac_addr, uint8_t sendStatus)
+#else
+void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t sendStatus)
+#endif
+{
+    if (sendStatus == ESP_NOW_SEND_SUCCESS)
+    {
+        esp_now_ack_flag = CRC_OK;
+    }
+    else
+    {
+        esp_now_ack_flag = CRC_BAD;
+    }
+}
+
+#ifdef ESP8266
+void OnDataRecv(uint8_t *mac, uint8_t *incomingData, uint8_t len)
+#else
+void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len)
+#endif
+{
     if (len < sizeof(DataReading))
     {
         SystemPacket command;

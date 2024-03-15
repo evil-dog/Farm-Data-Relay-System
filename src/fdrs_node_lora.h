@@ -3,13 +3,6 @@
 
 #include <RadioLib.h>
 
-// Internal Globals
-// Default values: overridden by settings in config, if present
-
-#define GLOBAL_ACK_TIMEOUT 400 // LoRa ACK timeout in ms. (Minimum = 200)
-#define GLOBAL_LORA_RETRIES 2  // LoRa ACK automatic retries [0 - 3]
-#define GLOBAL_LORA_TXPWR 17   // LoRa TX power in dBm (: +2dBm - +17dBm (for SX1276-7) +20dBm (for SX1278))
-
 // select LoRa band configuration
 #if defined(LORA_FREQUENCY)
 #define FDRS_LORA_FREQUENCY LORA_FREQUENCY
