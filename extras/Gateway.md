@@ -28,6 +28,8 @@ The addresses of LoRa repeaters neighboring this gateway.
 #### `#define USE_ESPNOW`
 Enables ESP-NOW.
 
+#### `#define USE_SERIAL`
+Enables/disables UART. If you are using 2 separate ESP's for the gateway you must enable USE_SERIAL.
 #### `#define USE_LORA`
 Enables LoRa. Ensure your pins are configured correctly.
 #### `#define USE_WIFI`

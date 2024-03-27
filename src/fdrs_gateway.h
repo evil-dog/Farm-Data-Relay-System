@@ -70,26 +70,28 @@ void releaseLogBuffer();
   #include "fdrs_oled.h"
 
   FDRS_OLED oled(OLED_SDA, OLED_SCL, OLED_RST, OLED_PAGE_SECS, false, UNIT_MAC, OLED_HEADER, 0);
-#endif
+#endif // USE_OLED
 
 #include "fdrs_debug.h"
+#ifdef USE_SERIAL
 #include "fdrs_gateway_serial.h"
+#endif // USE_SERIAL
 #include "fdrs_gateway_scheduler.h"
 #ifdef USE_ESPNOW
   #include "fdrs_gateway_espnow.h"
-#endif
+#endif // USE_ESPNOW
 #ifdef USE_LORA
   #include "fdrs_gateway_lora.h"
-#endif
+#endif // USE_LORA
 #ifdef USE_WIFI
   #include "fdrs_gateway_wifi.h"
   #include "fdrs_gateway_mqtt.h"
   #include "fdrs_gateway_ota.h"
-#endif
+#endif // USE_WIFI
 
 #ifdef DEBUG_CONFIG
   #include "fdrs_checkConfig.h"
-#endif
+#endif // DEBUG_CONFIG
 
 void sendFDRS()
 {
@@ -122,14 +124,16 @@ void beginFDRS()
   Serial.begin(115200);
 #elif defined(ESP32)
   Serial.begin(115200);
+# ifdef USE_SERIAL
   UART_IF.begin(115200, SERIAL_8N1, RXD2, TXD2);
+# endif // USE_SERIAL
 #endif
 
 #ifdef USE_OLED
   oled.init_oled();
   DBG("Display initialized!");
   DBG("Hello, World!");
-#endif
+#endif // USE_OLED
   DBG("");
   DBG("Initializing FDRS Gateway!");
   DBG("Address: " + String(UNIT_MAC, HEX));
@@ -146,21 +150,21 @@ void beginFDRS()
 #ifdef USE_LORA
   begin_lora();
   scheduleFDRS(asyncReleaseLoRaFirst, FDRS_LORA_INTERVAL);
-#endif
+#endif // USE_LORA
 #ifdef USE_WIFI
   begin_wifi();
   DBG("Connected.");
   begin_mqtt();
   begin_OTA();
-#endif
+#endif // USE_WIFI
 #ifdef USE_ESPNOW
   begin_espnow();
-#endif
+#endif // USE_ESPNOW
 
 
 #ifdef USE_WIFI
   client.publish(TOPIC_STATUS, "FDRS initialized");
-#endif
+#endif // USE_WIFI
 }
 
 void handleCommands()
@@ -189,17 +193,19 @@ void loopFDRS()
 {
   handle_schedule();
   handleCommands();
+#ifdef USE_SERIAL
   handleSerial();
+#endif // USE_SERIAL
 #ifdef USE_LORA
   handleLoRa();
-#endif
+#endif // USE_LORA
 #ifdef USE_WIFI
   handleMQTT();
   handleOTA();
-#endif
+#endif // USE_WIFI
 #ifdef USE_OLED
   oled.drawPageOLED(true);
-#endif
+#endif // USE_OLED
   if (newData != event_clear)
   {
     switch (newData)
@@ -241,14 +247,14 @@ void loopFDRS()
   void broadcastLoRa() {}
   void sendLoRaNbr(uint8_t address) {}
   void timeFDRSLoRa(uint8_t *address) {}
-#endif
+#endif // USE_LORA
 #ifndef USE_ESPNOW
   void sendESPNowNbr(uint8_t interface) {}
   void sendESPNowPeers() {}
   void sendESPNow(uint8_t address) {}
-#endif
+#endif // USE_ESPNOW
 #ifndef USE_WIFI
   void sendMQTT() {}
-#endif
+#endif // USE_WIFI
 
 #endif //__FDRS_GATEWAY_h__
